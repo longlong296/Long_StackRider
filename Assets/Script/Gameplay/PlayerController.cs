@@ -7,7 +7,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float fowardForce = 5000f;
     [SerializeField] float sidewayForce = 1500f;
     private Rigidbody rbChar;
+
     public static int score = 0;
+
     public float leftBound;
     public float rightBound;
     public static bool going = true;
@@ -22,22 +24,23 @@ public class PlayerController : MonoBehaviour
     }
 
     // Update is called once per frame
-    void FixedUpdate()
+    void FixUpdate()
 
     {
 
-        RaycastHit hit;
-        if (Physics.Raycast(Vector3.zero, Vector3.down, out hit))
-        {
-            Debug.DrawLine(hit.point, hit.normal);
-            Debug.Log(hit.collider.gameObject.name);
-            Debug.Log(hit.collider.gameObject.GetComponent<Renderer>().bounds.size);
+        //RaycastHit hit;
+        //if (Physics.Raycast(Vector3.zero, Vector3.down, out hit))
+        //{
+        //    Debug.DrawLine(hit.point, hit.normal);
+        //    Debug.Log(hit.collider.gameObject.name);
+        //    Debug.Log(hit.collider.gameObject.GetComponent<Renderer>().bounds.size);
 
-        }
+        //}
         //rbChar.transform.forward*;
         //dy chuyen ve phia truoc
         if (!going.Equals(false))
         {
+            
             rbChar.AddForce(0, 0, fowardForce * Time.deltaTime);
             if (Input.GetKey(KeyCode.D))
             {
@@ -62,7 +65,7 @@ public class PlayerController : MonoBehaviour
 
         }
         //should be raycasting to check the boundary
-        invinsibleBoundary(3.3447f, -3.3447f);
+        invinsibleBoundary(2, -2);
 
 
 
