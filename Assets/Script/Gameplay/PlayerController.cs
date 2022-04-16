@@ -7,20 +7,22 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float fowardForce = 5000f;
     [SerializeField] float sidewayForce = 1500f;
     private Rigidbody rbChar;
-
+    private Transform charr;
     public static int score = 0;
 
-    public float leftBound;
-    public float rightBound;
-    public static bool going = true;
+    //public float leftBound;
+    //public float rightBound;
+    public static bool going = false;
     public static int buttonNumber = 999;
+    
+
 
 
     // Start is called before the first frame update
     void Start()
     {
         rbChar = GetComponent<Rigidbody>();
-
+        charr=GetComponent<Transform>();
     }
 
     // Update is called once per frame
@@ -45,7 +47,7 @@ public class PlayerController : MonoBehaviour
             if (Input.GetKey(KeyCode.D))
             {
                 //Rotate the sprite about the Y axis in the positive direction
-                rbChar.AddForce(sidewayForce * Time.deltaTime, 0, fowardForce * Time.deltaTime / 2);
+                //charr.Translate(0, 0, 0);
                 //set cho khoi cau dung im sau khi nhan nut xong
                 //tranh tron truot
                 if (Input.GetKeyUp(KeyCode.D)) { rbChar.AddForce(0, 0, fowardForce * Time.deltaTime / 2); }

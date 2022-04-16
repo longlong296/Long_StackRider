@@ -53,11 +53,15 @@
     <UnityVersion>2020.3.25f1</UnityVersion>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Assets\Script\Gameplay\CoinController.cs" />
     <Compile Include="Assets\Script\UI\Tutorial.cs" />
     <Compile Include="Assets\Script\Gameplay\CameraController.cs" />
     <Compile Include="Assets\Script\Gameplay\GameController.cs" />
     <Compile Include="Assets\Script\Gameplay\PlayerController.cs" />
-    <Compile Include="Assets\Script\Gameplay\CoinController.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Assets\Fonts\OFL.txt" />
+    <None Include="Assets\Fonts\README.txt" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
