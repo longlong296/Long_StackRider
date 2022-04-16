@@ -58,6 +58,7 @@
     <Compile Include="Assets\Script\Gameplay\CameraController.cs" />
     <Compile Include="Assets\Script\Gameplay\GameController.cs" />
     <Compile Include="Assets\Script\Gameplay\PlayerController.cs" />
+    <Compile Include="Assets\Script\Gameplay\BallControl.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Fonts\OFL.txt" />
