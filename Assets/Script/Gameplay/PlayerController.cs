@@ -4,16 +4,18 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] float fowardForce = 5000f;
-    [SerializeField] float sidewayForce = 1500f;
+    //[SerializeField] float fowardForce = 5000f;
+    //[SerializeField] float sidewayForce = 1500f;
     private Rigidbody rbChar;
     private Transform charr;
     public static int score = 0;
-
-    //public float leftBound;
-    //public float rightBound;
+    private float limiter;
+  
     public static bool going = false;
     public static int buttonNumber = 999;
+
+    Vector3 speed;
+
     
 
 
@@ -21,53 +23,45 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        rbChar = GetComponent<Rigidbody>();
+       rbChar = GetComponent<Rigidbody>();
         charr=GetComponent<Transform>();
     }
 
     // Update is called once per frame
-    void FixUpdate()
+    void FixedUpdate()
 
     {
-
-        //RaycastHit hit;
-        //if (Physics.Raycast(Vector3.zero, Vector3.down, out hit))
-        //{
-        //    Debug.DrawLine(hit.point, hit.normal);
-        //    Debug.Log(hit.collider.gameObject.name);
-        //    Debug.Log(hit.collider.gameObject.GetComponent<Renderer>().bounds.size);
-
-        //}
-        //rbChar.transform.forward*;
-        //dy chuyen ve phia truoc
-        if (!going.Equals(false))
+        //making raycast is expensive
+        RaycastHit hit;
+        if (Physics.Raycast(transform.position, Vector3.down, out hit))
         {
             
-            rbChar.AddForce(0, 0, fowardForce * Time.deltaTime);
-            if (Input.GetKey(KeyCode.D))
+           //Debug.Log(hit.collider.gameObject.name);
+           limiter= hit.collider.gameObject.GetComponentInChildren<Renderer>().bounds.size.x;
+
+        }
+
+        //dy chuyen ve phia truoc
+        if (!going == true) { 
+        transform.Translate(new Vector3(0, 0, 4) * Time.deltaTime);
+        //rbChar.AddForce(0, 0, fowardForce * Time.deltaTime);
+        if (Input.GetKey(KeyCode.D))
             {
-                //Rotate the sprite about the Y axis in the positive direction
-                //charr.Translate(0, 0, 0);
-                //set cho khoi cau dung im sau khi nhan nut xong
-                //tranh tron truot
-                if (Input.GetKeyUp(KeyCode.D)) { rbChar.AddForce(0, 0, fowardForce * Time.deltaTime / 2); }
+            transform.Translate(new Vector3(2, 0, 2) * Time.deltaTime);
+                
             }
-
-
-
 
             if (Input.GetKey(KeyCode.A))
             {
 
-                rbChar.AddForce(-sidewayForce * Time.deltaTime, 0, fowardForce * Time.deltaTime / 3);
-                //set cho khoi cau dung im sau khi nhan nut xong
-                //tranh tron truot
-                if (Input.GetKeyUp(KeyCode.A)) { rbChar.AddForce(0, 0, fowardForce * Time.deltaTime / 3); }
+            transform.Translate(new Vector3(-2, 0, 2) * Time.deltaTime);
+           
             }
-
         }
+        
+        
         //should be raycasting to check the boundary
-        invinsibleBoundary(2, -2);
+        invinsibleBoundary(limiter/2, -(limiter/2));
 
 
 
@@ -91,5 +85,9 @@ public class PlayerController : MonoBehaviour
         }
 
 
+    }
+    private void OnCollisionEnter(Collision collision)
+    {
+        
     }
 }

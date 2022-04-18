@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class BallControl : MonoBehaviour
 {
-    // Start is called before the first frame update
+   public  Stack myStack =new Stack();
+
     void Start()
     {
         
@@ -14,5 +15,14 @@ public class BallControl : MonoBehaviour
     void Update()
     {
         
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Balls")
+        {
+            myStack.Push(this.gameObject.name);
+            Debug.Log(myStack.Peek());
+                
+        }
     }
 }

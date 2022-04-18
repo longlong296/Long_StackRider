@@ -18,28 +18,24 @@ public class Tutorial : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void LateUpdate()
     {
         coinText.text=PlayerController.score.ToString();
+        
         if (tutorialSlider != null)
         {
-            if (PlayerController.going == true) { 
+            if (PlayerController.going == false) { 
                 tutorialSlider.enabled=false;
                 isSliding = false;
             }
             else
             {
-                //tutorialSlider.value=0;
-                if (tutorialSlider.value != 10)
-                {
-                    isSliding = true;
-                    tutorialSlider.value=tutorialSlider.value*Time.deltaTime;
+                isSliding = true;
+                if (isSliding = true) 
+                { 
+                    tutorialSlider.value = 0;
                 }
-                else
-                {
-                    isSliding = false;
-                    
-                }
+
             }
         }
     }

@@ -20,11 +20,12 @@ public class CoinController : MonoBehaviour
     }
     private void OnTriggerEnter(Collider col)
     {
-        if (col.name == "Player")
+        if (col.name == "Ball")
         {
             Destroy(gameObject);
             Debug.Log("Cong 1 diem");
             PlayerController.score++;
+            Debug.Log(PlayerController.score);
 
         }
     }
