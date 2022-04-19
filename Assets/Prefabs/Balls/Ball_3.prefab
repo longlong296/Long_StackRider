@@ -104,10 +104,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3530095383324012840}
-  - component: {fileID: 2993174062839646827}
+  - component: {fileID: 3829202547711986252}
   m_Layer: 0
   m_Name: Ball_3
-  m_TagString: Untagged
+  m_TagString: Balls
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -127,7 +127,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!54 &2993174062839646827
+--- !u!54 &3829202547711986252
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

@@ -18,15 +18,5 @@ public class CoinController : MonoBehaviour
         angle += rotationSpeed * Time.deltaTime;
         transform.localRotation = Quaternion.Euler( 0.0f, angle, 0.0f);
     }
-    private void OnTriggerEnter(Collider col)
-    {
-        if (col.name == "Ball")
-        {
-            Destroy(gameObject);
-            Debug.Log("Cong 1 diem");
-            PlayerController.score++;
-            Debug.Log(PlayerController.score);
 
-        }
-    }
 }

@@ -22,22 +22,8 @@ public class Tutorial : MonoBehaviour
     {
         coinText.text=PlayerController.score.ToString();
         
-        if (tutorialSlider != null)
-        {
-            if (PlayerController.going == false) { 
-                tutorialSlider.enabled=false;
-                isSliding = false;
-            }
-            else
-            {
-                isSliding = true;
-                if (isSliding = true) 
-                { 
-                    tutorialSlider.value = 0;
-                }
-
-            }
-        }
+       
+        
     }
   
 }
