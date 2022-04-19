@@ -126,7 +126,7 @@ public class PlayerController : MonoBehaviour
         {
             Debug.Log("Lose a ball");
             ballCount--;
-            if (ballCount!=0)
+            if (ballCount != 0)
             {
                 //wall logic
             }
@@ -139,7 +139,7 @@ public class PlayerController : MonoBehaviour
                 lostGame = true;
                 //lose game logic
             }
-            
+
 
         }
         else if (other.tag == "Finish")
@@ -157,7 +157,28 @@ public class PlayerController : MonoBehaviour
               ballCount++;
               myStack.Push(col.gameObject);
               col.gameObject.transform.parent = this.transform;
-              //Debug.Log(myStack.Peek());
+            //Debug.Log(myStack.Peek());
+        }
+        else if (col.gameObject.tag == "Wall")
+        {
+            Debug.Log("Lose a ball");
+            ballCount--;
+            //Debug.Log(ballCount);
+            if (ballCount != 0)
+            {
+                //wall logic
+            }
+            else
+            {
+                Debug.Log("Lose game");
+                //GameObject.Find("LoseGame").SetActive(true);
+                this.transform.Translate(Vector3.zero);
+                going = false;
+                lostGame = true;
+                //lose game logic
+            }
+
+
         }
     }
 
