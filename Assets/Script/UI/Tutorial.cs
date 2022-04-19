@@ -7,23 +7,18 @@ public class Tutorial : MonoBehaviour
 {
     Text coinText;
     public Slider tutorialSlider;
-    private bool isSliding=true;
+    
 
     // Start is called before the first frame update
     void Start()
     {
-      coinText=  this.GetComponentInChildren<Text>();
-       
-            
+      coinText=  this.GetComponentInChildren<Text>();     
     }
 
     // Update is called once per frame
     void LateUpdate()
     {
         coinText.text=PlayerController.score.ToString();
-        
-       
-        
     }
   
 }

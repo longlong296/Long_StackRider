@@ -13,11 +13,13 @@ public class PlayerController : MonoBehaviour
     private float limiter;
     private float xPos;
 
-    public static bool going = false;
+    public static bool going = true;
+    public static bool winGame = false;
+    public static bool lostGame = false;
     public static int buttonNumber = 999;
 
     public static int ballCount = 1;
-    public Stack myStack = new Stack();
+    public Stack<GameObject> myStack = new Stack<GameObject>();
     Vector3 speed;
 
     
@@ -35,7 +37,7 @@ public class PlayerController : MonoBehaviour
     void FixedUpdate()
 
     {
-     
+        //raycasty is still expensive
         RaycastHit hit;
         if (Physics.Raycast(transform.position, Vector3.down, out hit))
         {
@@ -44,7 +46,7 @@ public class PlayerController : MonoBehaviour
 
         //dy chuyen ve phia truoc
 #if UNITY_EDITOR
-        if (!going == true) { 
+        if (!going == false) { 
         transform.Translate(new Vector3(0, 0, 2) * Time.deltaTime);
         //rbChar.AddForce(0, 0, fowardForce * Time.deltaTime);
         if (Input.GetKey(KeyCode.D))
@@ -123,28 +125,67 @@ public class PlayerController : MonoBehaviour
         else if (other.tag == "Wall")
         {
             Debug.Log("Lose a ball");
+            ballCount--;
+            if (ballCount!=0)
+            {
+                //wall logic
+            }
+            else
+            {
+                Debug.Log("Lose game");
+                //GameObject.Find("LoseGame").SetActive(true);
+                this.transform.Translate(Vector3.zero);
+                going = false;
+                lostGame = true;
+                //lose game logic
+            }
+            
 
         }
         else if (other.tag == "Finish")
-        {
+        {   going= false;
+            this.transform.Translate(Vector3.zero);
+            StartCoroutine(calculationFinish(0.5f));
 
-            StartCoroutine(calculationFinish(0.2f));
+            if (winGame == true) { StartCoroutine(waitWin()); }
         }
     }
     private void OnCollisionEnter(Collision col)
     {
         if(col.gameObject.tag == "Balls")
         {
+              ballCount++;
               myStack.Push(col.gameObject);
               col.gameObject.transform.parent = this.transform;
-              Debug.Log(myStack.Peek());
+              //Debug.Log(myStack.Peek());
         }
     }
 
     IEnumerator calculationFinish(float a)
-    {
+    {   
+        int xScore=0;
+        if(ballCount > 0)
+        {
+            for(int i=1; i < myStack.Count;i=i+0)
+            {
+                Destroy(myStack.Pop().gameObject);
+                xScore += 5;
+                score += xScore;
+                Debug.Log(xScore);
+                ballCount--; 
+                yield return new WaitForSeconds(a);
+            }
+
+           
+        }
+        winGame = true;
        
-        myStack.Pop();
-        yield return new WaitForSeconds(a);
+      
+    }
+    IEnumerator waitWin()
+    {
+        //win logic here
+        yield return new WaitForSeconds(1f);
+
     }
 }
