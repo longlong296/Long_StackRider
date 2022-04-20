@@ -879,7 +879,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -2585090334592294470, guid: 3437bd540a5b5c346a30543c00cd7b41, type: 3}
       propertyPath: m_IsTrigger
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4226265806932545476, guid: 3437bd540a5b5c346a30543c00cd7b41, type: 3}
       propertyPath: m_Name
@@ -1391,7 +1391,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7449267971862275779, guid: 57168e21e96058c4baeb345805046683, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 8.963613
+      value: 3.42
       objectReference: {fileID: 0}
     - target: {fileID: 7449267971862275779, guid: 57168e21e96058c4baeb345805046683, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1430,6 +1430,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7449267972188646017, guid: 57168e21e96058c4baeb345805046683, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 8.19
+      objectReference: {fileID: 0}
+    - target: {fileID: 7449267972188646017, guid: 57168e21e96058c4baeb345805046683, type: 3}
       propertyPath: m_LocalPosition.y
       value: 0
       objectReference: {fileID: 0}
@@ -1459,7 +1463,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 94
   m_CollisionDetection: 0
 --- !u!1001 &4384895270674312722
 PrefabInstance:
@@ -2078,6 +2082,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Finish
       objectReference: {fileID: 0}
+    - target: {fileID: 8178712424429584558, guid: 284f037d0d6ce0946ac7d011614ec2cb, type: 3}
+      propertyPath: m_TagString
+      value: Finish
+      objectReference: {fileID: 0}
     - target: {fileID: 8178712426175128272, guid: 284f037d0d6ce0946ac7d011614ec2cb, type: 3}
       propertyPath: m_Name
       value: End
@@ -2128,9 +2136,9 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 284f037d0d6ce0946ac7d011614ec2cb, type: 3}
---- !u!1 &5574005646389961628 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8178712424276366162, guid: 284f037d0d6ce0946ac7d011614ec2cb, type: 3}
+--- !u!4 &5574005645066408477 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8178712426175128275, guid: 284f037d0d6ce0946ac7d011614ec2cb, type: 3}
   m_PrefabInstance: {fileID: 4384895271315271886}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &5574005646543188064 stripped
@@ -2138,26 +2146,8 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 8178712424429584558, guid: 284f037d0d6ce0946ac7d011614ec2cb, type: 3}
   m_PrefabInstance: {fileID: 4384895271315271886}
   m_PrefabAsset: {fileID: 0}
---- !u!4 &5574005645066408477 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 8178712426175128275, guid: 284f037d0d6ce0946ac7d011614ec2cb, type: 3}
-  m_PrefabInstance: {fileID: 4384895271315271886}
-  m_PrefabAsset: {fileID: 0}
---- !u!135 &4384895270225846892
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5574005646389961628}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.6451779
-  m_Center: {x: 0.00000007947286, y: -5.322332, z: 0.04}
---- !u!136 &705955284
-CapsuleCollider:
+--- !u!65 &404296524
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -2166,10 +2156,9 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
-  m_Radius: 0.5000001
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0.000000059604645, y: 0.00000047683716, z: 0.0000075399876}
+  serializedVersion: 2
+  m_Size: {x: 4.35, y: 2, z: 1.0000002}
+  m_Center: {x: 0.000000059604645, y: 2.5, z: 0.0000075399876}
 --- !u!1001 &4384895271369615828
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2236,6 +2225,10 @@ PrefabInstance:
     - target: {fileID: 2021400597660303229, guid: 26d23734b3a960c4988f7d9b586cc0f8, type: 3}
       propertyPath: m_IsTrigger
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7470609012395273221, guid: 26d23734b3a960c4988f7d9b586cc0f8, type: 3}
+      propertyPath: m_Constraints
+      value: 96
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 26d23734b3a960c4988f7d9b586cc0f8, type: 3}

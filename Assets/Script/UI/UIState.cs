@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UIState : MonoBehaviour
 {
@@ -8,7 +9,7 @@ public class UIState : MonoBehaviour
     public GameObject winPanel;
     public GameObject losePanel;
     public GameObject closePanel;
-    
+    public Text scoreText;
   
     // Update is called once per frame
     void LateUpdate()
@@ -22,4 +23,15 @@ public class UIState : MonoBehaviour
             losePanel.SetActive(true);
         }
     }
+
+    IEnumerator popUpText(string score, Color color, Text text, Vector3 direction,float fadeTime )
+    {
+        scoreText.text = score; 
+        scoreText.color = color;    
+
+        scoreText.transform.Translate(direction);
+       
+        yield return new WaitForSeconds(fadeTime);   
+    }
+
 }
