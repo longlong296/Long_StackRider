@@ -11,24 +11,35 @@ public class PlayerController : MonoBehaviour
     private float limiter;
     private float xPos;
 
-    public static bool going = true;
+    public static bool going = false;
     public static bool winGame = false;
     public static bool lostGame = false;
     public static int buttonNumber = 999;
 
     public static int ballCount = 1;
     public Stack<GameObject> myStack = new Stack<GameObject>();
+    Animator characterAnim;
     Vector3 speed;
 
     // Start is called before the first frame update
     void Start()
-    {
+    {   
+        characterAnim = GetComponent<Animator>();   
         rbChar = GetComponent<Rigidbody>();
         charr = GetComponent<Transform>();
     }
 
+    private void Update()
+    {
+
+        if (Input.GetMouseButtonDown(0) &&!winGame||!lostGame)
+        {
+
+            going = true;
+        }
+    }
     // Update is called once per frame
-    void FixedUpdate()
+    void LateUpdate()
 
     {
         //raycasty is still expensive
@@ -42,6 +53,8 @@ public class PlayerController : MonoBehaviour
 #if UNITY_EDITOR
         if (!going == false)
         {
+            characterAnim.SetBool("going",true);
+
             transform.Translate(new Vector3(0, 0, 2) * Time.deltaTime);
             //rbChar.AddForce(0, 0, fowardForce * Time.deltaTime);
             if (Input.GetKey(KeyCode.D))
@@ -56,7 +69,7 @@ public class PlayerController : MonoBehaviour
                 transform.Translate(new Vector3(-2, 0, 2) * Time.deltaTime);
 
             }
-        }
+
 
 #endif
 
@@ -74,40 +87,35 @@ public class PlayerController : MonoBehaviour
                 Vector3 moveVector = new Vector3(xPos - transform.position.x, 0, runSpeed * Time.deltaTime);
                 characterController.Move(moveVector);
 #endif
+        }
+
         //should be raycasting to check the boundary
         invinsibleBoundary(limiter / 2, -(limiter / 2));
-
-
-
     }
 
     void invinsibleBoundary(float a, float _a)
     {
         //raycasting instead of hard adjustment
+        //chinh qua ben phai
         if (transform.position.x > a - 0.1f)
         {
             transform.position = new Vector3(a - 0.1f, transform.position.y, transform.position.z);
         }
-
-        //chinh boundary qua ben phai
+        //chinh boundary qua ben trai
         if (transform.position.x < _a + 0.1f)
         {
             transform.position = new Vector3(_a + 0.1f, transform.position.y, transform.position.z);
         }
-
-
     }
     private void OnTriggerEnter(Collider other)
     {
-
-        if (other.tag == "Balls")
-        {
-
-            myStack.Push(other.gameObject);
-            other.transform.parent = this.transform;
-            Debug.Log(myStack.Peek());
-        }
-        else if (other.tag == "Coin")
+        //if (other.tag == "Balls")
+        //{
+        //    myStack.Push(other.gameObject);
+        //    other.transform.parent = this.transform;
+        //    Debug.Log(myStack.Peek());
+        //}
+         if (other.tag == "Coin")
         {
             score++;
             Destroy(other.gameObject);
@@ -151,23 +159,34 @@ public class PlayerController : MonoBehaviour
         if (col.gameObject.tag == "Balls")
         {
             ballCount++;
-            myStack.Push(col.gameObject);
-            col.gameObject.transform.parent = this.transform;
+            
+
+            if (ballCount > 2)
+            {
+                Vector3 a = new Vector3(transform.localPosition.x, myStack.Peek().gameObject.transform.localPosition.y - 1, transform.localPosition.z);
+               pushBall(col.gameObject, a);    
+            }
+            else
+            {
+                Vector3 _a = new Vector3(transform.localPosition.x, transform.localPosition.y-1, transform.localPosition.z);
+                pushBall(col.gameObject, _a);
+
+            }
+            Destroy(col.gameObject);
+            //ballsCollected.Peek().gameObject.transform.position.y - 1
+            //myStack.Push(col.gameObject);
+            //vut di-------
+            //col.gameObject.transform.parent = this.transform;
             //Debug.Log(myStack.Peek());
         }
         else if (col.gameObject.tag == "Wall")
         {
             Debug.Log("Lose a ball");
             ballCount--;
-            
-            GameObject balls= myStack.Pop();
-            balls.transform.parent = null;
-
-            
-            Debug.Log("Pop a ball");
-            //Debug.Log(ballCount);
             if (ballCount != 0)
-            {
+            {  
+                GameObject balls = myStack.Pop();
+                balls.transform.parent = null;
                 //wall logic
             }
             else
@@ -207,7 +226,20 @@ public class PlayerController : MonoBehaviour
         yield return new WaitForSeconds(1f);
 
     }
+    public void pushBall(GameObject ballP,Vector3 newPos)
+    {
+
+        transform.position = new Vector3(transform.position.x, transform.position.y + 1, transform.position.z);
+
+        GameObject myNewBall = Instantiate(ballP.gameObject, newPos, Quaternion.identity);
+        myNewBall.transform.SetParent(transform);
+        Destroy(ballP.gameObject);
+        var center = this.GetComponent<BoxCollider>().center;
+        this.GetComponent<BoxCollider>().center = new Vector3(center.x, center.y - 1, center.z);
+        myStack.Push(myNewBall);
+    }
 }
+
 //     public void CollectBall(Ball newBall)
 //    {
 //        ballsCollected.Push(newBall);
